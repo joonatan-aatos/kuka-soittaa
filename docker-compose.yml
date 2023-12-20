@@ -23,7 +23,7 @@ services:
     volumes:
       - uploads:/usr/src/app/uploads
     restart: always
-  
+
   admin-panel:
     image: joonatanaatos/kuka-soittaa-admin-panel:latest
     ports:

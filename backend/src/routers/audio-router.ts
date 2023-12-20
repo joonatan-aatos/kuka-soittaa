@@ -45,7 +45,7 @@ router.get('/', requireAdminToken, (_req, res) => {
   });
 });
 
-router.get('/:name', requireAdminToken, (req, res) => {
+router.get('/:name', (req, res) => {
   const name = req.params.name;
   const filePath = `${appRootPath}/${uploadsDestination}${name}`;
   if (existsSync(filePath)) {

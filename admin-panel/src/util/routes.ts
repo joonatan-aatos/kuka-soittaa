@@ -28,7 +28,6 @@ export const getAudioList = () => request<string[]>(['audio'], undefined);
 export const postAudio = (audio: FormData) =>
   request<string>(['audio'], {
     method: 'POST',
-    headers,
     body: audio,
   });
 export const deleteAudio = (id: string) =>
