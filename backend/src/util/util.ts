@@ -34,10 +34,14 @@ export const checkAppVersion = (
   if (!version) {
     debug('No app version set in environment variables!');
     next();
+    return;
   }
 
   const appVersion = req.get('App-Version');
-  if (!appVersion) next();
+  if (!appVersion) {
+    next();
+    return;
+  }
 
   if (appVersion === version) {
     next();
