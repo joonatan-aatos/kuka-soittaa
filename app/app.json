@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Kuka soittaa?",
+    "slug": "kuka-soittaa",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "kukasoittaa"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.joonatanaatos.kukasoittaa"
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c72fb7cc-2b5d-4d6b-8265-0cf6e59c5a18"
+      }
+    }
+  }
+}
