@@ -24,3 +24,24 @@ export const requireAdminToken = (
     res.sendStatus(401);
   }
 };
+
+export const checkAppVersion = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const version = process.env.APP_VERSION;
+  if (!version) {
+    debug('No app version set in environment variables!');
+    next();
+  }
+
+  const appVersion = req.get('App-Version');
+  if (!appVersion) next();
+
+  if (appVersion === version) {
+    next();
+  } else {
+    res.status(400).send('App version mismatch');
+  }
+};

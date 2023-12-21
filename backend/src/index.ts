@@ -9,6 +9,7 @@ import audioRouter from './routers/audio-router';
 import { createJobs } from './scheduler/scheduler';
 import adminRouter from './routers/admin-router';
 import debug from './util/debug';
+import { checkAppVersion } from './util/util';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use((req, _res, next) => {
   debug(`${req.method} ${req.path}`);
   next();
 });
+
+app.use(checkAppVersion);
 
 app.use('/users', userRouter);
 app.use('/events', eventRouter);
