@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { Router } from 'express';
-import { mkdirSync, readdir, unlink } from 'fs';
+import { mkdirSync, unlink } from 'fs';
 import prisma from '../util/prisma-client';
 import multer from 'multer';
 import path from 'path';
@@ -12,7 +12,7 @@ const uploadsDestination = 'uploads/';
 const imagesDestination = `${uploadsDestination}images/`;
 const audioDestination = `${uploadsDestination}audio/`;
 const defaultAudioPath = 'defaults/audio.wav';
-const defaultImagePath = 'defaults/image.png';
+// const defaultImagePath = 'defaults/image.png';
 
 const storage = multer.diskStorage({
   destination(_req, file, callback) {

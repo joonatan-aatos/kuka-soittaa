@@ -7,8 +7,6 @@ import { requireAdminToken } from '../util/util';
 
 const router = Router();
 const uploadsDestination = 'uploads/audio/';
-const defaultAudioPath = 'defaults/audio.wav';
-const defaultImagePath = 'defaults/image.png';
 
 const storage = multer.diskStorage({
   destination(_req, file, callback) {

@@ -9,7 +9,7 @@ export const connect = async () => {
   await client
     .$connect()
     .then(() => debug('Connected to database'))
-    .catch((e: any) => debug(e));
+    .catch((e: unknown) => debug(e));
 };
 
 export default client;

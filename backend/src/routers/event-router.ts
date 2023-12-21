@@ -24,6 +24,13 @@ router.get('/', async (_req, res) => {
         lt: new Date(),
       },
     },
+    include: {
+      caller: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
   res.status(200).send({ current: currentEvent, next: nextEvent });
 });
