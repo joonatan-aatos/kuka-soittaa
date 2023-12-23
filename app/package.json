@@ -4,7 +4,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "tsc && expo start",
+    "build": "tsc",
     "android": "expo start --android",
+    "lint": "eslint . && prettier --check .",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
@@ -38,6 +40,7 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.1.1",
     "typescript": "^4.9.4"
   },
   "private": true

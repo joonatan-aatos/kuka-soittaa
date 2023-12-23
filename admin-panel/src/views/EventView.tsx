@@ -19,7 +19,7 @@ const EventView = () => {
     <Container>
       <NewEventModal
         isOpen={newEventModalOpen}
-        onClose={async (success) => {
+        onClose={async (_success) => {
           setNewEventModalOpen(false);
         }}
       />
@@ -33,8 +33,9 @@ const EventView = () => {
       <DeleteConfirmModal
         isOpen={eventToDelete !== null}
         onClose={async (success) => {
+          if (!eventToDelete) return;
           if (success) {
-            await removeEvent(eventToDelete!.id);
+            await removeEvent(eventToDelete.id);
           }
           setEventToDelete(null);
         }}

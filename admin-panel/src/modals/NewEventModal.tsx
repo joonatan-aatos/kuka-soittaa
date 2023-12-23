@@ -21,7 +21,7 @@ const NewEventModal = ({ isOpen, onClose }: NewEventModalProps) => {
         `Added event for ${new Date(result.time).toLocaleDateString()}!`,
       );
       await onClose(true);
-    } catch (e: any) {
+    } catch (e: unknown) {
       toast.error(`Failed to add caller`);
       await onClose(false);
     }
