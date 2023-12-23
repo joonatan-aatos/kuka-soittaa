@@ -42,6 +42,7 @@ interface AppContextInterface {
   removeAudio: (id: string) => Promise<void>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const defaultFunction = (): any =>
   console.warn('AppContext function not implemented');
 

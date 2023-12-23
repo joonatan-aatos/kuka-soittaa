@@ -7,6 +7,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "tsc",
+    "lint": "eslint . && prettier --check .",
     "db-generate": "prisma generate",
     "db-clear": "prisma db push --force-reset",
     "db-push": "prisma db push"

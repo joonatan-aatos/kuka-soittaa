@@ -17,7 +17,7 @@ const NewCallerModal = ({ isOpen, onClose }: NewCallerModalProps) => {
       const result = await createCaller(formData);
       toast.success(`Added caller ${result.name}!`);
       await onClose(true);
-    } catch (e: any) {
+    } catch (e: unknown) {
       toast.error(`Failed to add caller`);
       await onClose(false);
     }
