@@ -20,6 +20,7 @@ export const postEvent = (event: object) =>
   request<Event>(['events'], {
     method: 'POST',
     body: JSON.stringify(event),
+    headers,
   });
 export const deleteEvent = (id: string) =>
   request<Event>(['events', id], { method: 'DELETE' });

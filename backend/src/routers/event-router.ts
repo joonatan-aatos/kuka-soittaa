@@ -38,8 +38,9 @@ router.get('/', async (_req, res) => {
 router.get('/all', requireAdminToken, async (_req, res) => {
   const events = await prisma.event.findMany({
     orderBy: {
-      time: 'asc',
+      time: 'desc',
     },
+    take: 10,
   });
   res.status(200).send(events);
 });

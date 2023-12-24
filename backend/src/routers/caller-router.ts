@@ -36,7 +36,11 @@ const upload = multer({ storage, limits: { fileSize: 100 * 1024 * 1024 } });
 
 router.get('/', requireAdminToken, async (req, res) => {
   try {
-    const callers = await prisma.caller.findMany();
+    const callers = await prisma.caller.findMany({
+      orderBy: {
+        name: 'asc',
+      },
+    });
     res.send(callers);
   } catch (e) {
     console.error(e);

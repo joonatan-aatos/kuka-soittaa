@@ -6,7 +6,7 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   return (
-    <Container>
+    <Container className="py-4">
       <div className="d-flex py-4 justify-content-between align-items-center">
         <h1>Admin panel</h1>
       </div>

@@ -5,13 +5,13 @@ model Event {
   id       String   @id @default(uuid())
   time     DateTime
   answers  Answer[]
-  caller   Caller   @relation(fields: [callerId], references: [id])
+  caller   Caller   @relation(fields: [callerId], references: [id], onDelete: Cascade)
   callerId String
 }
 
 model Answer {
   id       String   @id @default(uuid())
-  event    Event    @relation(fields: [eventId], references: [id])
+  event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId  String
   user     User     @relation(fields: [userId], references: [id])
   userId   String
