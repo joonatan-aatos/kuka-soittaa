@@ -45,13 +45,17 @@ export const useApi = <Type>(path: string[], options?: RequestInit) => {
 export const api = async <Type>(path: string[], options?: RequestInit) => {
   const url = `${API_URL}/${path.join('/')}`;
 
-  return (await fetch(url, {
+  const res = await fetch(url, {
     headers,
     ...options,
-  })
-    .then(async (res) => {
-      if (res.ok) return res.json();
-      throw new Error(await res.text());
-    })
-    .catch((err) => console.error(err))) as Promise<Type>;
+  });
+
+  if (res.ok) {
+    try {
+      return (await res.json()) as Type;
+    } catch (e) {
+      return undefined;
+    }
+  }
+  throw new Error(await res.text());
 };

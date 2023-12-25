@@ -1,6 +1,6 @@
 import { useApi } from './base';
 
-interface Event {
+export interface Event {
   id: string;
   time: string;
   callerId: string;

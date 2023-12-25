@@ -19,6 +19,7 @@ model Answer {
   accepted Boolean
   comment  String   @default("")
   created  DateTime @default(now())
+  likes    Like[]
 }
 
 model User {
@@ -26,6 +27,16 @@ model User {
   name    String
   created DateTime @default(now())
   answers Answer[]
+  likes   Like[]
+}
+
+model Like {
+  answer   Answer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  answerId String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
+
+  @@id([answerId, userId])
 }
 
 model Caller {

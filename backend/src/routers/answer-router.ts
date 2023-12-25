@@ -21,12 +21,12 @@ const getNewestEvent = async () => {
 router.get('/', async (_req, res) => {
   const event = await getNewestEvent();
   assert(event, 'No events found');
-  const answers = await prisma.answer.findMany({
+  const answersRaw = await prisma.answer.findMany({
     where: {
       eventId: event.id,
     },
     orderBy: {
-      created: 'desc',
+      created: 'asc',
     },
     select: {
       accepted: true,
@@ -35,8 +35,18 @@ router.get('/', async (_req, res) => {
       eventId: true,
       id: true,
       userName: true,
+      _count: {
+        select: {
+          likes: true,
+        },
+      },
     },
   });
+  const answers = answersRaw.map((answer) => ({
+    ...answer,
+    likes: answer._count?.likes,
+    _count: undefined,
+  }));
   res.status(200).send(answers);
 });
 
@@ -105,6 +115,89 @@ router.put('/:id', async (req, res) => {
   });
   assert(answer, 'Answer update failed');
   res.status(200).send(answer);
+});
+
+router.get('/liked/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  if (!userId) {
+    res.status(400);
+    return;
+  }
+  const event = await getNewestEvent();
+  if (!event) {
+    res.sendStatus(500);
+    return;
+  }
+  const answers = await prisma.answer.findMany({
+    where: {
+      likes: {
+        some: {
+          userId,
+        },
+      },
+      eventId: event.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  res.status(200).send(answers.map((answer) => answer.id));
+});
+
+router.post('/:id/like', async (req, res) => {
+  const id = req.params.id;
+  const userId = req.body.userId;
+  const answer = await prisma.answer.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!answer) {
+    res.status(400).send('Answer does not exist');
+    return;
+  }
+  const existingLike = await prisma.like.findFirst({
+    where: {
+      answerId: id,
+      userId,
+    },
+  });
+  if (existingLike) {
+    res.status(400).send('User already liked this answer');
+    return;
+  }
+  const like = await prisma.like.create({
+    data: {
+      answerId: id,
+      userId,
+    },
+  });
+  assert(like, 'Like creation failed');
+  res.sendStatus(200);
+});
+
+router.delete('/:id/like', async (req, res) => {
+  const id = req.params.id;
+  const userId = req.body.userId;
+  const like = await prisma.like.findFirst({
+    where: {
+      answerId: id,
+      userId,
+    },
+  });
+  if (!like) {
+    res.status(400).send('User has not liked this answer');
+    return;
+  }
+  await prisma.like.delete({
+    where: {
+      answerId_userId: {
+        answerId: id,
+        userId,
+      },
+    },
+  });
+  res.sendStatus(200);
 });
 
 export default router;

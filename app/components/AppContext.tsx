@@ -113,7 +113,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const promptDone = (name: string) => {
     setPromptForName(false);
     createUser(name).then((user) => {
-      if (user.id) {
+      if (user?.id) {
         setUserId(user.id);
         AsyncStorage.setItem('userId', user.id);
       }

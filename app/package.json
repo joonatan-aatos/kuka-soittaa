@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "tsc && expo start",
+    "start": "tsc && expo start -c",
     "build": "tsc",
     "android": "expo start --android",
     "lint": "eslint . && prettier --check .",
