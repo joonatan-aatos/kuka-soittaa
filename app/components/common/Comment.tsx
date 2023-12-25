@@ -73,12 +73,12 @@ const Comment = ({ index, answer, currentEvent }: CommentProps) => {
           }}
         >
           <Text
-            style={{ flex: 5, color: answer.accepted ? 'green' : 'red' }}
+            style={{ flex: 1, color: answer.accepted ? 'green' : 'red' }}
             variant="labelLarge"
           >
             {answer.userName}
           </Text>
-          <Text style={{ flex: 12, color: 'black' }}>{answer.comment}</Text>
+          <Text style={{ flex: 3, color: 'black' }}>{answer.comment}</Text>
         </View>
       </TouchableOpacity>
       <View
@@ -97,10 +97,11 @@ const Comment = ({ index, answer, currentEvent }: CommentProps) => {
             marginHorizontal: -10,
             marginVertical: -4,
           }}
+          textColor="mediumvioletred"
           onPress={onLikeClicked}
           disabled={likeDisabled}
         >
-          <Text>{nofLikes}</Text>
+          <Text style={{ color: 'black' }}>{nofLikes}</Text>
         </Button>
         <Text style={{ flex: 3, color: 'black', textAlign: 'right' }}>
           {getTimeText(answer.created)}
