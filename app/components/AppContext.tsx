@@ -138,7 +138,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
           alignItems: 'center',
         }}
       >
-        <Text>Error: {error}</Text>
+        <Text>{error.toString()}</Text>
       </View>
     );
   }

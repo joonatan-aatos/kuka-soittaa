@@ -9,29 +9,29 @@ const headers = {
 export const useApi = <Type>(path: string[], options?: RequestInit) => {
   const [data, setData] = useState<Type | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [status, setStatus] = useState<number | undefined>(undefined);
 
   const url = `${API_URL}/${path.join('/')}`;
 
   useEffect(() => {
-    fetch(url, {
-      headers,
-      ...options,
-    })
-      .then(async (res) => {
-        setStatus(res.status);
-        if (res.ok) return res.json();
-        return Promise.reject(await res.text());
-      })
-      .then((res) => {
-        setData(res);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err);
+    const fetchData = async () => {
+      setIsLoading(true);
+      const res = await fetch(url, {
+        headers,
+        ...options,
       });
+      setStatus(res.status);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data);
+      } else {
+        const data = await res.text();
+        setError(data);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
   }, [url, options]);
 
   return {
