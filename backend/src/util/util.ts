@@ -30,7 +30,7 @@ export const checkAppVersion = (
   res: Response,
   next: NextFunction,
 ) => {
-  const version = process.env.REQUIRED_APP_VERSION;
+  const version = process.env.APP_VERSION;
   if (!version) {
     debug('No app version set in environment variables!');
     next();
