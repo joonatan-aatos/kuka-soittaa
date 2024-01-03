@@ -8,12 +8,15 @@ export const setApiToken = (token: string) => {
   apiToken = token;
 };
 
+const joinPaths = (path1: string, path2: string) =>
+  `${path1.replace(/\/$/, '')}/${path2}`;
+
 export const request = async <T>(
   path: (string | number)[],
   options?: RequestInit,
 ): Promise<T> => {
   const url = new URL(backendUrl);
-  url.pathname = path.join('/');
+  url.pathname = joinPaths(url.pathname, path.join('/'));
   const finalUrl = url.toString();
 
   return await fetch(finalUrl, {
