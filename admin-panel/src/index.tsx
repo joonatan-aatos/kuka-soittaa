@@ -19,34 +19,39 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        {
+          path: '/',
+          element: <Navigate to="callers" />,
+        },
+        {
+          path: '/callers',
+          element: <CallerView />,
+        },
+        {
+          path: '/events',
+          element: <EventView />,
+        },
+        {
+          path: '/audio',
+          element: <AudioView />,
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <Navigate to="/callers" />,
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        path: '/',
-        element: <Navigate to="callers" />,
-      },
-      {
-        path: '/callers',
-        element: <CallerView />,
-      },
-      {
-        path: '/events',
-        element: <EventView />,
-      },
-      {
-        path: '/audio',
-        element: <AudioView />,
-      },
-    ],
+    basename: '/adminpanel',
   },
-  {
-    path: '*',
-    element: <Navigate to="/callers" />,
-  },
-]);
+);
 
 root.render(
   <React.StrictMode>

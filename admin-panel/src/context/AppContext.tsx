@@ -75,7 +75,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   const createCaller = async (caller: FormData) => {
     const newCaller = await postCaller(caller);
-    setCallers([...callers, newCaller]);
+    setCallers([...callers, newCaller].sort());
     return newCaller;
   };
   const removeCaller = async (id: string) => {
@@ -92,7 +92,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     const newEvent = await postEvent(event);
     setEvents(
       [...events, newEvent].sort(
-        (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
+        (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
       ),
     );
     return newEvent;
@@ -109,7 +109,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   const createAudio = async (audioData: FormData) => {
     const newAudio = await postAudio(audioData);
-    setAudio([...audio, newAudio]);
+    setAudio([...audio, newAudio].sort());
     return newAudio;
   };
   const removeAudio = async (id: string) => {
